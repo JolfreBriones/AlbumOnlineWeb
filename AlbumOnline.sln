@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlbumOnline", "AlbumOnline\AlbumOnline.csproj", "{DB9E1A5E-34E1-40DA-B91A-2A69818F14EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB9E1A5E-34E1-40DA-B91A-2A69818F14EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB9E1A5E-34E1-40DA-B91A-2A69818F14EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB9E1A5E-34E1-40DA-B91A-2A69818F14EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB9E1A5E-34E1-40DA-B91A-2A69818F14EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ECDFB8FB-E64B-4096-BE17-8D63836F3C1D}
+	EndGlobalSection
+EndGlobal

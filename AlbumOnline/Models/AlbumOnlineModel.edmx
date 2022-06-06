@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AlbumOnlineModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="AlbumOnlineModelStoreContainer">
+    <EntitySet Name="Tipos" EntityType="AlbumOnlineModel.Store.Tipos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Photos" EntityType="AlbumOnlineModel.Store.Photos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Comentarios" EntityType="AlbumOnlineModel.Store.Comentarios" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PhotoComentario" Association="AlbumOnlineModel.Store.PhotoComentario">
+      <End Role="Photo" EntitySet="Photos" />
+      <End Role="Comentario" EntitySet="Comentarios" />
+    </AssociationSet>
+    <AssociationSet Name="TipoPhoto" Association="AlbumOnlineModel.Store.TipoPhoto">
+      <End Role="Tipo" EntitySet="Tipos" />
+      <End Role="Photo" EntitySet="Photos" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Tipos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descrip" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Photos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Img" Type="varbinary(max)" Nullable="false" />
+    <Property Name="User" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TipoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comentarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Texto" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PhotoId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="PhotoComentario">
+    <End Role="Photo" Type="AlbumOnlineModel.Store.Photos" Multiplicity="1" />
+    <End Role="Comentario" Type="AlbumOnlineModel.Store.Comentarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comentario">
+        <PropertyRef Name="PhotoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TipoPhoto">
+    <End Role="Tipo" Type="AlbumOnlineModel.Store.Tipos" Multiplicity="1" />
+    <End Role="Photo" Type="AlbumOnlineModel.Store.Photos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Photo">
+        <PropertyRef Name="TipoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="AlbumOnlineModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="AlbumOnlineModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tipos" EntityType="AlbumOnlineModel.Tipo" />
+          <EntitySet Name="Photos" EntityType="AlbumOnlineModel.Photo" />
+          <EntitySet Name="Comentarios" EntityType="AlbumOnlineModel.Comentario" />
+          <AssociationSet Name="PhotoComentario" Association="AlbumOnlineModel.PhotoComentario">
+            <End Role="Photo" EntitySet="Photos" />
+            <End Role="Comentario" EntitySet="Comentarios" />
+          </AssociationSet>
+          <AssociationSet Name="TipoPhoto" Association="AlbumOnlineModel.TipoPhoto">
+            <End Role="Tipo" EntitySet="Tipos" />
+            <End Role="Photo" EntitySet="Photos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Tipo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descrip" Type="String" Nullable="false" />
+          <NavigationProperty Name="Photo" Relationship="AlbumOnlineModel.TipoPhoto" FromRole="Tipo" ToRole="Photo" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Comentario" Relationship="AlbumOnlineModel.PhotoComentario" FromRole="Photo" ToRole="Comentario" />
+          <NavigationProperty Name="Tipo" Relationship="AlbumOnlineModel.TipoPhoto" FromRole="Photo" ToRole="Tipo" />
+          <Property Name="Img" Type="Binary" Nullable="false" />
+          <Property Name="User" Type="String" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" />
+          <Property Name="TipoId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comentario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User" Type="String" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" />
+          <Property Name="Texto" Type="String" Nullable="false" />
+          <NavigationProperty Name="Photo" Relationship="AlbumOnlineModel.PhotoComentario" FromRole="Comentario" ToRole="Photo" />
+          <Property Name="PhotoId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="PhotoComentario">
+          <End Type="AlbumOnlineModel.Photo" Role="Photo" Multiplicity="1" />
+          <End Type="AlbumOnlineModel.Comentario" Role="Comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comentario">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TipoPhoto">
+          <End Type="AlbumOnlineModel.Tipo" Role="Tipo" Multiplicity="1" />
+          <End Type="AlbumOnlineModel.Photo" Role="Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="TipoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AlbumOnlineModelStoreContainer" CdmEntityContainer="AlbumOnlineModelContainer">
+    <EntitySetMapping Name="Tipos">
+      <EntityTypeMapping TypeName="IsTypeOf(AlbumOnlineModel.Tipo)">
+        <MappingFragment StoreEntitySet="Tipos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descrip" ColumnName="Descrip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Photos">
+      <EntityTypeMapping TypeName="IsTypeOf(AlbumOnlineModel.Photo)">
+        <MappingFragment StoreEntitySet="Photos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Img" ColumnName="Img" />
+          <ScalarProperty Name="User" ColumnName="User" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="TipoId" ColumnName="TipoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comentarios">
+      <EntityTypeMapping TypeName="IsTypeOf(AlbumOnlineModel.Comentario)">
+        <MappingFragment StoreEntitySet="Comentarios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="User" ColumnName="User" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Texto" ColumnName="Texto" />
+          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

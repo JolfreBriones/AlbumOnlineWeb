@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fe790baf24ce49df8576518f95d7d4ea" Name="Diagram1" >
+        <EntityTypeShape EntityType="AlbumOnlineModel.Tipo" Width="1.5" PointX="2.75" PointY="3.125" />
+        <EntityTypeShape EntityType="AlbumOnlineModel.Photo" Width="1.875" PointX="5.375" PointY="2.75" />
+        <EntityTypeShape EntityType="AlbumOnlineModel.Comentario" Width="1.5" PointX="7.75" PointY="3.5" />
+        <AssociationConnector Association="AlbumOnlineModel.PhotoComentario" />
+        <AssociationConnector Association="AlbumOnlineModel.TipoPhoto" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
