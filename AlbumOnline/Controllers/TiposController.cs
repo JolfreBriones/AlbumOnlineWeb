@@ -10,6 +10,7 @@ using AlbumOnline.Models;
 
 namespace AlbumOnline.Controllers
 {
+    [Authorize]
     public class TiposController : Controller
     {
         private AlbumOnlineModelContainer db = new AlbumOnlineModelContainer();

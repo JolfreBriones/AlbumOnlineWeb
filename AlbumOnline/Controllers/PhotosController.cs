@@ -11,6 +11,7 @@ using AlbumOnline.Models;
 
 namespace AlbumOnline.Controllers
 {
+    [Authorize]
     public class PhotosController : Controller
     {
         private AlbumOnlineModelContainer db = new AlbumOnlineModelContainer();
